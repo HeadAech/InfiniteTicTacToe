@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://32wmjtkaef3j"]
+
+[ext_resource type="Script" path="res://scripts/touch_area.gd" id="1_w6jw6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3a2p"]
+size = Vector2(200, 200)
+
+[node name="TouchArea" type="Area2D"]
+script = ExtResource("1_w6jw6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x3a2p")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
