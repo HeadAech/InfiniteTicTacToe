@@ -9,7 +9,9 @@ extends CanvasLayer
 @onready var win_label = $"Control/In Game UI/Bottom Bar/Win Label"
 @onready var winner = $"Control/In Game UI/Bottom Bar/Win Label/Winner"
 
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player_points = $AnimationPlayerPoints
+@onready var animation_player_win = $AnimationPlayerWin
+
 
 
 func _ready():
@@ -37,9 +39,9 @@ func _on_restart_pressed():
 
 func on_update_turn_count(x, o):
 	if x_turns.text != str(x):
-		animation_player.play("x_score")
+		animation_player_points.play("x_score")
 	if o_turns.text != str(o):
-		animation_player.play("o_score")
+		animation_player_points.play("o_score")
 	x_turns.text = str(x)
 	o_turns.text = str(o)
 
@@ -49,7 +51,7 @@ func on_update_turn_text(turn):
 func on_show_win_text(winner):
 	self.winner.text = winner
 	win_label.show()
-	animation_player.play("win")
+	animation_player_win.play("win")
 
 func on_hide_win_text():
 	win_label.hide()

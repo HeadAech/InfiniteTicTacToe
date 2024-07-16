@@ -3,6 +3,21 @@
 [ext_resource type="Script" path="res://scripts/figure.gd" id="1_dgvhg"]
 [ext_resource type="Texture2D" uid="uid://pbo17q7i8el8" path="res://assets/sprites/Circle.png" id="1_i6l8d"]
 
+[sub_resource type="Animation" id="Animation_kfuio"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_mneay"]
 resource_name = "fading"
 length = 2.0
@@ -18,21 +33,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.998421), Color(1, 1, 1, 0.993701), Color(1, 1, 1, 0.985893), Color(1, 1, 1, 0.975081), Color(1, 1, 1, 0.961384), Color(1, 1, 1, 0.944952), Color(1, 1, 1, 0.925965), Color(1, 1, 1, 0.904632), Color(1, 1, 1, 0.881185), Color(1, 1, 1, 0.855882), Color(1, 1, 1, 0.829001), Color(1, 1, 1, 0.800834), Color(1, 1, 1, 0.771692), Color(1, 1, 1, 0.741893), Color(1, 1, 1, 0.711765), Color(1, 1, 1, 0.681636), Color(1, 1, 1, 0.651837), Color(1, 1, 1, 0.622695), Color(1, 1, 1, 0.594529), Color(1, 1, 1, 0.567647), Color(1, 1, 1, 0.542344), Color(1, 1, 1, 0.518898), Color(1, 1, 1, 0.497564), Color(1, 1, 1, 0.478577), Color(1, 1, 1, 0.462146), Color(1, 1, 1, 0.448449), Color(1, 1, 1, 0.437637), Color(1, 1, 1, 0.429828), Color(1, 1, 1, 0.425108), Color(1, 1, 1, 0.423529), Color(1, 1, 1, 0.425108), Color(1, 1, 1, 0.429828), Color(1, 1, 1, 0.437637), Color(1, 1, 1, 0.448449), Color(1, 1, 1, 0.462146), Color(1, 1, 1, 0.478577), Color(1, 1, 1, 0.497564), Color(1, 1, 1, 0.518898), Color(1, 1, 1, 0.542344), Color(1, 1, 1, 0.567647), Color(1, 1, 1, 0.594529), Color(1, 1, 1, 0.622695), Color(1, 1, 1, 0.651837), Color(1, 1, 1, 0.681636), Color(1, 1, 1, 0.711765), Color(1, 1, 1, 0.741894), Color(1, 1, 1, 0.771692), Color(1, 1, 1, 0.800834), Color(1, 1, 1, 0.829001), Color(1, 1, 1, 0.855882), Color(1, 1, 1, 0.881185), Color(1, 1, 1, 0.904632), Color(1, 1, 1, 0.925965), Color(1, 1, 1, 0.944952), Color(1, 1, 1, 0.961384), Color(1, 1, 1, 0.975081), Color(1, 1, 1, 0.985893), Color(1, 1, 1, 0.993701), Color(1, 1, 1, 0.998421), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_kfuio"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6mea0"]

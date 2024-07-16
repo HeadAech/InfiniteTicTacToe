@@ -23,6 +23,8 @@ Signals="*res://scripts/signals.gd"
 
 window/size/viewport_width=828
 window/size/viewport_height=1792
+window/size/resizable=false
+window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/handheld/orientation=1
 window/canvas_textures/default_texture_filter=0
@@ -31,3 +33,4 @@ window/canvas_textures/default_texture_filter=0
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

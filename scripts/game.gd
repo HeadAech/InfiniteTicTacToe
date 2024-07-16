@@ -2,6 +2,9 @@ extends Node2D
 
 @onready var in_game_node = $"In Game"
 @onready var animation_player = $AnimationPlayer
+@onready var audio_place_figure = $"Audio Place Figure"
+@onready var audio_win = $"Audio Win"
+
 
 var figure_names = {
 	0: "O",
@@ -106,6 +109,7 @@ func free_space(index):
 	spaces[index] = false
 
 func spawn_figure(index, pos):
+	audio_place_figure.play()
 	var fig = figures[current_turn].instantiate()
 	fig.position = pos
 	fig.index = index
@@ -165,6 +169,7 @@ func win():
 	Signals.UpdateTurnCount.emit(wins_counter[1], wins_counter[0])
 	in_game = false
 	animation_player.play("hide")
+	audio_win.play()
 	await get_tree().create_timer(3).timeout
 	Signals.HideWinText.emit()
 	next_match()
