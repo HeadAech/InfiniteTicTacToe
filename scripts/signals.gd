@@ -11,3 +11,5 @@ signal ShowWinText(winner: String)
 signal HideWinText()
 
 signal ShowMainMenu()
+
+signal PcTakeTurn(index: int)

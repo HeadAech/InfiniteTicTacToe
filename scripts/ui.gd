@@ -27,6 +27,7 @@ func _ready():
 
 func _on_start_button_pressed():
 	main_menu.hide()
+	Globals.vs_pc_mode = false
 	Signals.StartGame.emit()
 	in_game_ui.show()
 
@@ -61,3 +62,10 @@ func _on_menu_button_pressed():
 	Signals.ShowMainMenu.emit()
 	_ready()
 	pass # Replace with function body.
+
+
+func _on_1_player_start_pressed():
+	main_menu.hide()
+	Globals.vs_pc_mode = true
+	Signals.StartGame.emit()
+	in_game_ui.show()

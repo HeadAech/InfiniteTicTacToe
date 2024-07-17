@@ -158,6 +158,7 @@ grow_vertical = 2
 color = Color(0.254902, 0.654902, 1, 1)
 
 [node name="In Game UI" type="Control" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -333,7 +334,6 @@ label_settings = SubResource("LabelSettings_slhd0")
 horizontal_alignment = 1
 
 [node name="MainMenu" type="Control" parent="Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -388,7 +388,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_nw6ox")
 theme_override_font_sizes/font_size = 82
-text = "Rozpocznij"
+text = "2 GRACZY"
+
+[node name="1 Player Start" type="Button" parent="Control/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.5
+offset_top = 109.0
+offset_right = 265.5
+offset_bottom = 259.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_nw6ox")
+theme_override_font_sizes/font_size = 82
+text = "1 GRACZ"
 
 [node name="Version" type="Label" parent="Control/MainMenu"]
 layout_mode = 1
@@ -400,7 +417,7 @@ offset_top = -111.0
 offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Version 0.0.1"
+text = "Version 0.1.0"
 label_settings = SubResource("LabelSettings_2h54g")
 horizontal_alignment = 1
 
@@ -417,3 +434,4 @@ libraries = {
 [connection signal="pressed" from="Control/In Game UI/Top Bar/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Control/In Game UI/Top Bar/Menu Button" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="Control/MainMenu/Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MainMenu/1 Player Start" to="." method="_on_1_player_start_pressed"]

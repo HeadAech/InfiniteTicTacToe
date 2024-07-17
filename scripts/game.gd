@@ -5,6 +5,8 @@ extends Node2D
 @onready var audio_place_figure = $"Audio Place Figure"
 @onready var audio_win = $"Audio Win"
 
+@export_range(0, 100) var CHANCE_TO_BLOCK := 35
+@export_range(0, 100) var CHANCE_TO_BEST_MOVE := 10
 
 var figure_names = {
 	0: "O",
@@ -21,7 +23,9 @@ const figures = [preload("res://scenes/circle.tscn"), preload("res://scenes/cros
 
 var current_turn := 0
 
-var past_turns = [
+var pc_turn : int = 1
+
+var past_turns := [
 	[], []
 ]
 
@@ -51,7 +55,10 @@ func on_show_main_menu():
 
 func start_game():
 	in_game = true
-	current_turn = 0
+	if Globals.vs_pc_mode:
+		current_turn = randi_range(0, 1)
+	else:
+		current_turn = 0
 	Signals.UpdateTurnText.emit(figure_names[current_turn])
 	turn_counter[0] = 0
 	turn_counter[1] = 0
@@ -69,6 +76,9 @@ func start_game():
 	in_game_node.show()
 	print(spaces)
 	animation_player.play("show")
+	
+	if Globals.vs_pc_mode:
+		make_pc_turn()
 
 func next_match():
 	for i in range(0, len(spaces)):
@@ -78,6 +88,7 @@ func next_match():
 			f.queue_free()
 		t.clear()
 	in_game = true
+	make_pc_turn()
 
 func on_area_touch(index, pos):
 	if not in_game:
@@ -92,7 +103,8 @@ func on_area_touch(index, pos):
 		check_limit()
 		if check_for_win():
 			win()
-	
+		else:
+			make_pc_turn()
 	pass
 
 func change_turn():
@@ -140,11 +152,8 @@ func check_limit():
 # 0 3 6
 # 1 4 7
 # 2 5 8
-func check_for_win():
-	var turn = (current_turn + 1) % 2
-	if len(past_turns[turn]) != 3:
-		return false
-	var win_conditions = [
+
+var win_conditions = [
 		# ROWS
 		[0, 1, 2], [3, 4, 5], [6, 7, 8],
 		# DIAGONAL
@@ -152,6 +161,11 @@ func check_for_win():
 		# COLUMNS
 		[0, 3, 6], [1, 4, 7], [2, 5, 8]
 	]
+
+func check_for_win():
+	var turn = (current_turn + 1) % 2
+	if len(past_turns[turn]) != 3:
+		return false
 	var turns = past_turns[turn]
 	var indexes = [turns[0].index, turns[1].index, turns[2].index]
 	indexes.sort()
@@ -174,3 +188,66 @@ func win():
 	Signals.HideWinText.emit()
 	next_match()
 	animation_player.play("show")
+
+func make_pc_turn():
+	if current_turn == pc_turn and Globals.vs_pc_mode:
+		in_game = false
+		var chance_for_win := randi_range(0, 100)
+		
+		var i = get_the_best_move()
+		var block_move = block_enemy_move()
+		printt("Chance: ", chance_for_win, " the best move: ", i)
+		
+		if chance_for_win <= CHANCE_TO_BEST_MOVE or i == null:
+			i = randi_range(0, len(spaces) - 1)
+			while spaces[i]:
+				i = randi_range(0, len(spaces) - 1)
+		
+		var chance_for_block := randi_range(0, 100)
+		
+		if chance_for_block >= CHANCE_TO_BLOCK and block_move != null:
+			printt("BLOCKING AT", block_move)
+			i = block_move
+		await get_tree().create_timer(randf_range(0.2, 0.6)).timeout
+		in_game = true
+		Signals.PcTakeTurn.emit(i)
+
+func get_the_best_move():
+	var placed = past_turns[pc_turn]
+	if len(placed) < 2:
+		return null
+	placed = [placed[len(placed) - 1].index, placed[len(placed) - 2].index]
+	var enemy_placed = past_turns[(pc_turn + 1) % 2]
+	enemy_placed = [enemy_placed[len(enemy_placed) - 1].index, enemy_placed[len(enemy_placed) - 2].index]
+	for index in range(len(win_conditions)):
+		var condition = win_conditions[index]
+		var missing_moves = []
+		for move in condition:
+			if move not in placed:
+				#printt("Thinking about: ", move, " and it's ", spaces[move])
+				if spaces[move] != true:
+					missing_moves.append(move)
+			if move in enemy_placed:
+				printt("Move in enemy placed")
+				break
+		if len(missing_moves) == 1:
+			return missing_moves[0]
+
+func block_enemy_move():
+	var enemy_moves = past_turns[(pc_turn + 1) % 2]
+	if len(enemy_moves) < 2:
+		return null
+	enemy_moves = [enemy_moves[len(enemy_moves) - 1].index, enemy_moves[len(enemy_moves) - 2].index]
+	print(enemy_moves)
+	for index in range(len(win_conditions)):
+		var condition = win_conditions[index]
+		var missing_moves = []
+		for move in condition:
+			if move not in enemy_moves:
+				#printt("Thinking about: ", move, " and it's ", spaces[move])
+				#if spaces[move] != true:
+				missing_moves.append(move)
+		if len(missing_moves) == 1:
+			if spaces[missing_moves[0]] == false:
+				return missing_moves[0]
+	return null
