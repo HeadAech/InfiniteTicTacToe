@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://61e1p4ssx8mq"]
 
 [ext_resource type="Script" path="res://scripts/figure.gd" id="1_dgvhg"]
-[ext_resource type="Texture2D" uid="uid://pbo17q7i8el8" path="res://assets/sprites/Circle.png" id="1_i6l8d"]
+[ext_resource type="Texture2D" uid="uid://jei2a330scpw" path="res://assets/sprites/new/o.png" id="2_8j2yu"]
 
 [sub_resource type="Animation" id="Animation_kfuio"]
 length = 0.001
@@ -46,7 +46,7 @@ script = ExtResource("1_dgvhg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3, 3)
-texture = ExtResource("1_i6l8d")
+texture = ExtResource("2_8j2yu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
