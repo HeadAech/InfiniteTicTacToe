@@ -1,6 +1,6 @@
 # Infinite Tic-Tac-Toe
 
-A mobile game made in Godot.
+A mobile game made in Godot featuring 2 player mode and single player vs AI.
 
 ## How to play
 
